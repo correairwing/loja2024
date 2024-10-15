@@ -38,7 +38,7 @@ public class ProdutoImagensService {
                 byte[] bytes = file.getBytes();
                 String nomeImagem = String.valueOf(prod.getId()) + file.getOriginalFilename();
                 Path path = Paths
-                .get("/home/correairwing/server/" + nomeImagem); 
+                .get("/home/correairwing/Documents/api-files/" + nomeImagem); 
                 Files.write(path, bytes);
                 newObj.setNome(nomeImagem);
                 }
