@@ -1,6 +1,8 @@
 package com.manauara.service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,11 @@ public class PessoaClienteService {
         pessoa.setDataCriacao(new Date());
         Pessoa newObj = repository.saveAndFlush(pessoa);
         permissaoPessoaService.vincularPessoaPermissaoCliente(newObj);
-        emailService.enviarEmailTexto(newObj.getEmail(), "Cadastro na Loja Tabajara", "O registro na loja foi realizado com sucesso. Em breve voce receberá a senha de acesso");
+        //emailService.enviarEmailTexto(newObj.getEmail(), "Cadastro na Loja Tabajara", "O registro na loja foi realizado com sucesso. Em breve voce receberá a senha de acesso");
+        Map<String, Object> propMap = new HashMap<>();
+        propMap.put("nome", newObj.getNome());
+        propMap.put("mensagem", "O registro na loja foi realizado com sucesso. Em breve voce receberá a senha de acesso");
+        emailService.enviarEmailTemplate(newObj.getEmail(), "Cadastro na Loja Tabajara", propMap);
         return newObj;
     }
 }
