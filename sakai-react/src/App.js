@@ -36,6 +36,8 @@ import TimelineDemo from './pages/TimelineDemo';
 import PrimeReact from 'primereact/api';
 import { Tooltip } from 'primereact/tooltip';
 
+import Estado from './pages/cadastros/Estado';
+
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
@@ -44,6 +46,7 @@ import './assets/demo/flags/flags.css';
 import './assets/demo/Demos.scss';
 import './assets/layout/layout.scss';
 import './App.scss';
+import Cidade from './pages/cadastros/Cidade';
 
 const App = () => {
     const [layoutMode, setLayoutMode] = useState('static');
@@ -160,6 +163,14 @@ const App = () => {
             label: 'Home',
             items: [{
                 label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
+            }]
+        },
+        {
+            label: 'Cadastros',
+            items: [{
+                label: 'Estados', icon: 'pi pi-fw pi-home', to: '/estados'
+            },{
+                label: 'Cidades', icon: 'pi pi-fw pi-home', to: '/cidades'
             }]
         },
         {
@@ -319,6 +330,8 @@ const App = () => {
                     <Route path="/crud" component={Crud} />
                     <Route path="/empty" component={EmptyPage} />
                     <Route path="/documentation" component={Documentation} />
+                    <Route path="/estados" component={Estado} />
+                    <Route path="/cidades" component={Cidade} />
                 </div>
 
                 <AppFooter layoutColorMode={layoutColorMode} />
