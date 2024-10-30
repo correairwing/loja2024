@@ -47,6 +47,8 @@ import './assets/demo/Demos.scss';
 import './assets/layout/layout.scss';
 import './App.scss';
 import Cidade from './pages/cadastros/Cidade';
+import Marca from './pages/cadastros/Marca';
+import Categoria from './pages/cadastros/Categoria';
 
 const App = () => {
     const [layoutMode, setLayoutMode] = useState('static');
@@ -168,9 +170,15 @@ const App = () => {
         {
             label: 'Cadastros',
             items: [{
-                label: 'Estados', icon: 'pi pi-fw pi-home', to: '/estados'
+                label: 'Estado', icon: 'pi pi-fw pi-home', to: '/estados'
             },{
-                label: 'Cidades', icon: 'pi pi-fw pi-home', to: '/cidades'
+                label: 'Cidade', icon: 'pi pi-fw pi-home', to: '/cidades'
+            },
+            {
+                label: 'Marca', icon: 'pi pi-fw pi-home', to: '/marcas'
+            },
+            {
+                label: 'Categoria', icon: 'pi pi-fw pi-home', to: '/categorias'
             }]
         },
         {
@@ -332,6 +340,8 @@ const App = () => {
                     <Route path="/documentation" component={Documentation} />
                     <Route path="/estados" component={Estado} />
                     <Route path="/cidades" component={Cidade} />
+                    <Route path="/marcas" component={Marca} />
+                    <Route path="/categorias" component={Categoria} />
                 </div>
 
                 <AppFooter layoutColorMode={layoutColorMode} />

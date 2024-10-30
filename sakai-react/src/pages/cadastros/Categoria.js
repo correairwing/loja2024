@@ -8,12 +8,11 @@ import { Toast } from 'primereact/toast';
 import { Toolbar } from 'primereact/toolbar';
 import React, { useEffect, useRef, useState } from 'react';
 import ColunaOpcoes from '../../components/ColunaOpcoes';
-import { EstadoService } from '../../service/cadastros/EstadoService';
+import { CategoriaService } from '../../service/cadastros/CategoriaService';
 
-const Estado = () => {
+const Categoria = () => {
     let objetoNovo = {
-        nome: '',
-        sigla: ''
+        nome: ''
     };
 
     const [objetos, setObjetos] = useState(null);
@@ -24,7 +23,7 @@ const Estado = () => {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
-    const objetoService = new EstadoService();
+    const objetoService = new CategoriaService();
 
     useEffect(() => {
         if (objetos == null) {
@@ -109,7 +108,7 @@ const Estado = () => {
         return (
             <React.Fragment>
                 <div className="my-2">
-                    <Button label="Novo Estado" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
+                    <Button label="Nova categoria" icon="pi pi-plus" className="p-button-success mr-2" onClick={openNew} />
 
                 </div>
             </React.Fragment>
@@ -134,18 +133,9 @@ const Estado = () => {
         );
     }
 
-    const siglaBodyTemplate = (rowData) => {
-        return (
-            <>
-                <span className="p-column-title">Sigla</span>
-                {rowData.sigla}
-            </>
-        );
-    }
-
     const header = (
         <div className="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <h5 className="m-0">Estados Cadastrados</h5>
+            <h5 className="m-0">Categorias cadastradas</h5>
             <span className="block mt-2 md:mt-0 p-input-icon-left">
                 <i className="pi pi-search" />
                 <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Buscar..." />
@@ -181,7 +171,6 @@ const Estado = () => {
                         globalFilter={globalFilter} emptyMessage="Sem objetos cadastrados." header={header} responsiveLayout="scroll">
                         <Column field="id" header="ID" sortable body={idBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column field="nome" header="Nome" sortable body={nomeBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
-                        <Column field="sigla" header="Sigla" body={siglaBodyTemplate} headerStyle={{ width: '14%', minWidth: '10rem' }}></Column>
                         <Column body={rowData => { return <ColunaOpcoes rowData={rowData} editObjeto={editObjeto} confirmDeleteObjeto={confirmDeleteObjeto} /> }}></Column>
                     </DataTable>
 
@@ -192,13 +181,6 @@ const Estado = () => {
                             <InputText id="nome" value={objeto.nome} onChange={(e) => onInputChange(e, 'nome')} required autoFocus className={classNames({ 'p-invalid': submitted && !objeto.nome })} />
                             {submitted && !objeto.name && <small className="p-invalid">Nome é Obrigatório.</small>}
                         </div>
-                        <div className="field">
-                            <label htmlFor="sigla">Sigla</label>
-                            <InputText id="sigla" value={objeto.sigla} onChange={(e) => onInputChange(e, 'sigla')} required className={classNames({ 'p-invalid': submitted && !objeto.sigla })} />
-                            {submitted && !objeto.sigla && <small className="p-invalid">Sigla é Obrigatório.</small>}
-                        </div>
-
-
                     </Dialog>
 
                     <Dialog visible={objetoDeleteDialog} style={{ width: '450px' }} header="Confirmação" modal footer={deleteObjetoDialogFooter} onHide={hideDeleteObjetoDialog}>
@@ -219,4 +201,4 @@ const comparisonFn = function (prevProps, nextProps) {
     return prevProps.location.pathname === nextProps.location.pathname;
 };
 
-export default React.memo(Estado, comparisonFn);
+export default React.memo(Categoria, comparisonFn);
